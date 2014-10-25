@@ -1,3 +1,3 @@
-<?
-phpinfo() ;
-?>
+<html><body>
+Test
+</body><html>
