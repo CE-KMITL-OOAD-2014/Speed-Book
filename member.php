@@ -25,15 +25,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span> 
             </button>
-            <a target="_blank" href="#" class="navbar-brand">My Book.</a>
+            <a href="#" class="navbar-brand">My Book.</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="Library.php">Library</a></li>
-                <li class="active"><a href="#" target="_blank">Upload File</a></li>
-				<li class="active"><a href="#" target="_blank">Delete File</a></li>
+                <li><a href="index.php?<? echo "user=$user"; ?>">Library</a></li>
+                <li class="active"><a href="#">Upload File</a></li>
+				<li class="active"><a href="#">Delete File</a></li>
 
-                <li><a href="About.html">About Us</a></li>
+                <li><a href="About.php?<? echo "user=$user"; ?>">About Us</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -48,8 +48,12 @@
                                 <div class="row">
                                     
                                     <div class="col-lg-8">
-                                        <p class="text-right"><strong>username</strong></p> 
+                                         <form action="index.php" method="get">  
+                                        <p class="text-right"><strong>username : </strong></p> 
+                                        <input type="text" id="user" name="user" class="login_input" value=<?echo $_GET["user"];?> >
                                         </p>
+                                        
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +64,7 @@
                                 <div class="row">
 								<div class="col-lg-12">
                                         <p>
-                                            <a href="member.html" class="btn btn-danger btn-block">profile</a>
+                                            <a href="member.php" class="btn btn-danger btn-block">profile</a>
                                         </p>
                                     </div>
                                     <div class="col-lg-12">
@@ -71,13 +75,35 @@
                                 </div>
                             </div>
                         </li>
-                    </ul>
+                    </ul>   
                 </li>
             </ul>
         </div>
     </div>
 </div>
 		
+        <?php 
+function isUser($user,$key){
+   
+    $db=mysql_connect("localhost","root","password")or die("ไม่สามารถติดต่อกับเซิฟเวอ");
+    mysql_select_db("speedbook",$db)or die("ไม่สามารถเลือกฐานข้อมูล");
+    try{
+
+    $result=mysql_query("SELECT*FROM login WHERE username LIKE '$user%' AND password LIKE '$key%' ",$db)or die("กรุณากรอกรหัสที่ถูกต้อง");
+     $rs=mysql_fetch_array($result)or die("กรุณากรอกรหัสผ่านที่ถูกต้อง");
+ $n=$rs[username];
+ $error = 'Always throw this error';
+    throw new Exception($error);}
+     catch(Exception $e){$n="";}
+    //echo $rs[username];
+    //echo "ooooo";
+    
+    mysql_close($db);
+    if($n==$user){return 1;}
+    else {return 0;}
+   
+}
+?>
    </body>
 
   

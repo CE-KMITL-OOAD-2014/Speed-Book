@@ -31,10 +31,10 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="Library.php">Library</a></li>
-				<li><a href="Login.php">Login</a></li>
-				<li><a href="Register.php">Register</a></li>
-				<li><a href="About.php>About Us</a></li>
+                <li><a href="index.php?<?echo "user=$user"; ?>">Library</a></li>
+                <li><a href="Login.php?<? echo "user=$user"; ?>">Login</a></li>
+				<li><a href="Register.php?<? echo "user=$user"; ?>">Register</a></li>
+				<li><a href="About.php?<? echo "user=$user"; ?>">About Us</a></li>
             </ul>
      <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -49,8 +49,12 @@
                                 <div class="row">
                                     
                                     <div class="col-lg-8">
-                                        <p class="text-right"><strong>username</strong></p> 
+                                    <form action="index.php" method="get">  
+                                        <p class="text-right"><strong>username : </strong></p> 
+                                        <input type="text" id="user" name="user" class="login_input" value=<?echo $_GET["user"];?> >
                                         </p>
+                                        
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -61,12 +65,12 @@
                                 <div class="row">
 								<div class="col-lg-12">
                                         <p>
-                                            <a href="member.html" class="btn btn-danger btn-block">profile</a>
+                                            <a href="member.php" class="btn btn-danger btn-block">profile</a>
                                         </p>
                                     </div>
                                     <div class="col-lg-12">
                                         <p>
-                                            <a href="#" class="btn btn-danger btn-block">Logout</a>
+                                            <a href="index.php" class="btn btn-danger btn-block">Logout</a>
                                         </p>
                                     </div>
                                 </div>
@@ -85,10 +89,11 @@
     	    <div class="col-xs-12">
         	    <div class="form-wrap">
                 <h1>Log in</h1>
-                    <form role="form" action="javascript:;" method="post" id="login-form" autocomplete="off">
+                  <form action="member.php" method="get">  
+                    
                         <div class="form-group">
                             <label for="email" class="sr-only">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
+                            <input type="email" name="user" id="user" class="form-control" placeholder="somebody@example.com">
                         </div>
                         <div class="form-group">
                             <label for="key" class="sr-only">Password</label>
@@ -98,7 +103,8 @@
                             <span class="character-checkbox" onclick="showPassword()"></span>
                             <span class="label">Show password</span>
                         </div>
-                        <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in">
+                        <input type="submit" name="login" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in">
+                    
                     </form>
                     <a href="javascript:;" class="forget" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>
                     <hr>
@@ -120,7 +126,7 @@
 			</div>
 			<div class="modal-body">
 				<p>Type your email account</p>
-				<input type="email" name="recovery-email" id="recovery-email" class="form-control" autocomplete="off">
+				<input type="text" name="recovery-email" id="recovery-email" class="form-control" autocomplete="off">
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -130,7 +136,18 @@
 	</div> <!-- /.modal-dialog -->
 </div> <!-- /.modal -->
 
+<?php 
+function isUser(){
+   if(isset($_GET["login"])){
+    $db=mysql_connect("localhost","root","password")or die("ไม่สามารถติดต่อกับเซิฟเวอ");
+    mysql_select_db("speedbook",$db)or die("ไม่สามารถเลือกฐานข้อมูล");
+    $result=mysql_query("SELECT*FROM login WHERE user LIKE '$user%' AND password LIKE '$password%'",$db);
 
+    if($result[username]==$username){return "true";}
+    else {return "false";}
+   }
+}
+?>
 
 
 

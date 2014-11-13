@@ -28,10 +28,10 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="Library.php">Library</a></li>
-				<li><a href="Login.php">Login</a></li>
-				<li><a href="Register.php">Register</a></li>
-				<li><a href="About.php">About Us</a></li>
+               <li><a href="index.php?<? echo "user=$user"; ?>">Library</a></li>
+                <li><a href="Login.php?<? echo "user=$user"; ?>">Login</a></li>
+                <li><a href="Register.php?<? echo "user=$user"; ?>">Register</a></li>
+                <li><a href="About.php?<? echo "user=$user"; ?>">About Us</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -46,8 +46,12 @@
                                 <div class="row">
                                     
                                     <div class="col-lg-8">
-                                        <p class="text-right"><strong>username</strong></p> 
+                                        <form action="index.php" method="get">  
+                                        <p class="text-right"><strong>username : </strong></p> 
+                                        <input type="text" id="user" name="user" class="login_input" value=<? echo $_GET["user"];?> >
                                         </p>
+                                        
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +62,7 @@
                                 <div class="row">
 								<div class="col-lg-12">
                                         <p>
-                                            <a href="member.html" class="btn btn-danger btn-block">profile</a>
+                                            <a href="member.php" class="btn btn-danger btn-block">profile</a>
                                         </p>
                                     </div>
                                     <div class="col-lg-12">
@@ -86,7 +90,13 @@
 		    <h1 align="center">www.facebook.com/niran.kortangsap<br><br><h1>
 			<h1 align="center">-------------------------------------------------<br><br><h1>
 
+
+            <?php 
+
+            ?>
+
    </body>
+
 
   
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

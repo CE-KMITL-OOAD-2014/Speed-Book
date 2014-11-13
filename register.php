@@ -28,10 +28,10 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="Library.php">Library</a></li>
-				<li><a href="Login.php">Login</a></li>
-				<li><a href="Register.php">Register</a></li>
-				<li><a href="About.php>About Us</a></li>
+               <li><a href="index.php?<? echo "user=$user"; ?>">Library</a></li>
+                <li><a href="Login.php?<? echo "user=$user"; ?>">Login</a></li>
+                <li><a href="Register.php?<? echo "user=$user"; ?>">Register</a></li>
+                <li><a href="About.php?<? echo "user=$user"; ?>">About Us</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -46,8 +46,12 @@
                                 <div class="row">
                                     
                                     <div class="col-lg-8">
-                                        <p class="text-right"><strong>username</strong></p> 
+                                        <form action="index.php" method="get">  
+                                        <p class="text-right"><strong>username : </strong></p> 
+                                        <input type="text" id="user" name="user" class="login_input" value=<? echo $_GET["user"];?> >
                                         </p>
+                                        
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +62,7 @@
                                 <div class="row">
 								<div class="col-lg-12">
                                         <p>
-                                            <a href="member.html" class="btn btn-danger btn-block">profile</a>
+                                            <a href="member.php" class="btn btn-danger btn-block">profile</a>
                                         </p>
                                     </div>
                                     <div class="col-lg-12">
@@ -77,6 +81,44 @@
 </div>
   <br><br><br>
  <div class="container">
+ <?php
+if($password==$password_confirmation){
+
+    if($_GET["submitReg"]){
+        $conn=mysql_connect("localhost","root","password")or die("ไม่สามารถติดต่อกับเซิฟเวอ");
+        mysql_select_db("speedbook",$conn)or die("ไม่สามารถเลือกฐานข้อมูล");       
+        $strSQL = "INSERT INTO login password VALUES '$password' ";
+        insert("login","password",$password);
+        update("login","username='$username'","password='$password'");
+         update("login","email='$email'","password='$password'");
+
+        mysql_query($strSQL);
+
+
+    }
+}
+
+function insert($strTable,$strField,$strValue)
+
+{
+
+$strSQL = "INSERT INTO $strTable ($strField) VALUES ($strValue) ";
+
+return @mysql_query($strSQL);
+
+}
+function update($strTable,$strCommand,$strCondition)
+
+{
+
+$strSQL = "UPDATE $strTable SET  $strCommand WHERE $strCondition ";
+
+return @mysql_query($strSQL);
+
+}
+
+ ?>
+
 
 <div class="row">
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
@@ -85,6 +127,7 @@
 			<hr class="colorgraph">
 			<div class="row">
 			<div class="form-group">
+            <form action="register.php" method="get">  
 				<input type="text" name="username" id="username" class="form-control input-lg" placeholder="username" tabindex="4">
 			</div>
 			<div class="form-group">
@@ -102,6 +145,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="row">
 				
 				
@@ -109,9 +153,11 @@
 			
 			<hr class="colorgraph">
 			<div class="row">
-				<div class="col-xs-12 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+				<div class="col-xs-12 col-md-6"><input type="submit" name="submitReg" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
 				<div class="col-xs-12 col-md-6"><a href="Login.html" class="btn btn-success btn-block btn-lg">Sign In</a></div>
+
 			</div>
+            
 		</form>
 	</div>
 </div>
