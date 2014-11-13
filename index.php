@@ -37,7 +37,20 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                    
-                        <strong>username</strong>
+                        <strong>    
+                         <?php 
+                            $db=mysql_connect("localhost","root","password"); 
+                            mysql_select_db("speedbook",$db);                           
+                            
+                            $result=mysql_query("SELECT*FROM login WHERE email LIKE '$user%'",$db)or die("กรุณาล๊อกอินด้วยรหัสผ่านที่ถูกต้อง");
+                            $rs=mysql_fetch_array($result)or die("กรุณากรอกรหัสผ่านที่ถูกต้อง");
+                           
+                            echo $rs[username];
+                            mysql_close($db);                      
+
+
+                            ?>
+                            </strong>
                         
                     </a>
                     <ul class="dropdown-menu">
@@ -62,12 +75,12 @@
                                 <div class="row">
 								<div class="col-lg-12">
                                         <p>
-                                            <a href="member.php" class="btn btn-danger btn-block">profile</a>
+                                            <a href="member.php?<?echo "user=$user"; ?>" class="btn btn-danger btn-block">profile</a>
                                         </p>
                                     </div>
                                     <div class="col-lg-12">
                                         <p>
-                                            <a href="#" class="btn btn-danger btn-block">Logout</a>
+                                            <a href="index.php" class="btn btn-danger btn-block">Logout</a>
                                         </p>
                                     </div>
                                 </div>
@@ -82,8 +95,10 @@
 <br><br><br>
 <div class="row">
   <div class="col-xs-6 col-md-3">
-    
-    <a href="#" class="thumbnail">
+    <?php 
+    $download="proposal.pdf";
+    ?>
+     <a href="file/<? echo $download; ?>"  class="thumbnail">
       <img data-src="holder.js/100%x180" alt="1" src="image/defaultimg.png">  
     </a>
   </div>
