@@ -32,7 +32,7 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="index.php?<?echo "user=$user"; ?>">Library</a></li>
-                <li><a href="Login.php?<? echo "user=$user"; ?>">Login</a></li>
+                 <!--<li><a href="Login.php?<? echo "user=$user"; ?>">Login</a></li>-->
 				<li><a href="Register.php?<? echo "user=$user"; ?>">Register</a></li>
 				<li><a href="About.php?<? echo "user=$user"; ?>">About Us</a></li>
             </ul>
