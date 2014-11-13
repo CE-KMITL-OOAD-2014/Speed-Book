@@ -1,5 +1,3 @@
-<html><body>
-<?
-echo "Test by Tua _D" ;
+<?php
+phpinfo();
 ?>
-</body></html>
