@@ -1,0 +1,5 @@
+<FilesMatch "\.*$" >
+
+ForceType application/octet-stream
+
+</FilesMatch>
