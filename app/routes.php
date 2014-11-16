@@ -51,14 +51,12 @@ Route::post('registered','RegisterController@register');
 Route::post('login','RegisterController@login');
 
 
-Route::get('form', function(){
-	return View::make('form');
+Route::get('upload', function(){
+	return View::make('upload');
 });
 
-Route::any('form-submit', function(){
-		$fileUser =	Input::file('file') ; 
-		$name =	$fileUser->getClientOriginalname();
-	
-	  $fileUser->move('File',$name);
+Route::post('form-submit','UploadController@upload');
 
+Route::get('phpLlistmenuDatebase', function(){
+	return View::make('phpLlistmenuDatebase');
 });
